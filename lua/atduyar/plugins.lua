@@ -2,6 +2,11 @@
 return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use "wbthomason/packer.nvim"
+	use 'github/copilot.vim'
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = ':TSUpdate'
+	}
 
 	-- intelisens
 	use 'hrsh7th/nvim-cmp'
@@ -11,6 +16,9 @@ return require("packer").startup(function(use)
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
+
+	use 'lewis6991/gitsigns.nvim'
+	use 'nvim-treesitter/nvim-treesitter'
 
 	-- intelisens
 	use {
@@ -45,4 +53,7 @@ return require("packer").startup(function(use)
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
 	use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
+	use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+		require("toggleterm").setup()
+	end}
 end)
