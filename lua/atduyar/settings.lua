@@ -10,30 +10,49 @@ wo.relativenumber = true
 
 -- set tab
 opt.expandtab = false
-opt.shiftwidth = 4
 opt.smartindent = true
+opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
 
 -- set backup
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.writebackup = false
+opt.writebackup = false
+opt.swapfile = false
+opt.backup = false
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
 
 -- set list chars
 opt.list = true
 opt.listchars = { tab = '→ ' }
 
+-- set updatetime
+opt.updatetime = 50
+
 -- set colors
 opt.cursorline = true
-vim.cmd("colorscheme carbonfox")
--- require('nightfox').load("carbonfox")
+vim.cmd("colorscheme nightfox")
 
--- NVimTree
+-- nvimTree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.nvim_tree_auto_close = 1
 opt.termguicolors = true
+
+-- foldtext
+function 
+	_G.custom_fold_text()
+	local line = vim.fn.getline(vim.v.foldstart)
+	local line_count = vim.v.foldend - vim.v.foldstart + 1
+	return "=>" .. line 
+end
+--opt.foldmethod = "indent"
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldtext = 'v:lua.custom_fold_text()'
+opt.fillchars = { eob = "-", fold = " " }
+
+
 require("nvim-tree").setup()
 
 -- ScrollBar
@@ -42,9 +61,6 @@ require("scrollbar").setup()
 -- Lualine
 require('lualine').setup()
 require("bufferline").setup{}
-
--- LspServerInstaller
-require("nvim-lsp-installer").setup{}
 
 require('gitsigns').setup()
 
@@ -81,3 +97,8 @@ require("telescope").setup {
     }
   },
 }
+
+local lsp = require('lsp-zero')
+
+lsp.preset('recommended')
+lsp.setup()

@@ -8,10 +8,21 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Copilot
-map('i', '<C-Up>', 'copilot#Previous()', {expr = true, silent = true})
-map('i', '<C-Down>', 'copilot#Next()', {expr = true, silent = true})
+-- map('i', '<C-Up>', 'copilot#Previous()', {expr = true, silent = true})
+-- map('i', '<C-Down>', 'copilot#Next()', {expr = true, silent = true})
+map('i', '<C-Up>', '<Plug>(copilot-Previous)', {expr = true, silent = true})
+map('i', '<C-Down>', '<Plug>(copilot-next)', {expr = true, silent = true})
 map('i', 'jk', [[<C-\><C-n>]])
 
+-- greatest remap ever
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- next greatest remap ever : asbjornHaland
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Telescope
 local builtin = require('telescope.builtin')
@@ -19,6 +30,7 @@ vim.keymap.set('n', 'ff', builtin.find_files, {})
 vim.keymap.set('n', 'fg', builtin.live_grep, {})
 vim.keymap.set('n', 'fb', builtin.buffers, {})
 vim.keymap.set('n', 'fh', builtin.help_tags, {})
+vim.keymap.set('n', '<C-k><C-d>', vim.lsp.buf.format, {})
 
 -- NVimTree
 vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<cr>', {})
@@ -34,5 +46,7 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<S-Up>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<S-Down>", ":m '>+1<CR>gv=gv")

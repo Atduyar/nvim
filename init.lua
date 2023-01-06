@@ -3,8 +3,6 @@
 -- require "plugins"
 -- require "mycmp"
 
-
-
 require('atduyar.abbreviations')
 require('atduyar.plugins')
 require('atduyar.settings')
