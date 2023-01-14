@@ -51,7 +51,7 @@ opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldtext = 'v:lua.custom_fold_text()'
 opt.fillchars = { eob = "-", fold = " " }
-
+opt.foldenable = false
 
 require("nvim-tree").setup()
 
