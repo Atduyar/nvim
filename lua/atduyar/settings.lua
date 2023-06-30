@@ -49,7 +49,8 @@ end
 --opt.foldmethod = "indent"
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldtext = 'v:lua.custom_fold_text()'
+opt.foldlevel = 99
+--opt.foldtext = 'v:lua.custom_fold_text()'
 opt.fillchars = { eob = "-", fold = " " }
 
 
@@ -60,7 +61,21 @@ require("scrollbar").setup()
 
 -- Lualine
 require('lualine').setup()
-require("bufferline").setup{}
+require("bufferline").setup{
+	options = {
+		offsets = {
+			{
+				filetype = "NvimTree",
+				text = "File Explorer",
+				-- text = function()
+				-- 	return vim.fn.getcwd()
+				-- end,
+				highlight = "Directory",
+				text_align = "left"
+			}
+		}
+	}
+}
 
 require('gitsigns').setup()
 
@@ -95,6 +110,17 @@ require("telescope").setup {
     find_files = {
       theme = "dropdown"
     }
+  },
+  defaults = {
+    ripgrep_arguments = {
+      'rg',
+      '--hidden',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
   },
 }
 

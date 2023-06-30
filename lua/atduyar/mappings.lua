@@ -13,6 +13,9 @@ end
 map('i', '<C-Up>', '<Plug>(copilot-Previous)', {expr = true, silent = true})
 map('i', '<C-Down>', '<Plug>(copilot-next)', {expr = true, silent = true})
 map('i', 'jk', [[<C-\><C-n>]])
+map("n", "<TAB>", ":bn<CR>")
+map("n", "<S-TAB>", ":bp<CR>")
+map('n', '<leader>d', ':bdelete<CR>')
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
